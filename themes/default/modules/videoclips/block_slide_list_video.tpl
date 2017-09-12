@@ -11,11 +11,14 @@
 			<!-- END: youtube -->
 		
 			<!-- BEGIN: player -->
-			<div>
+			<div class="detailContent_bl">
 				<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+                <script type="text/javascript" src="{NV_BASE_SITEURL}themes/{TEMPLATE}/images/{MODULE_NAME}/jwplayer/jwplayer.js"></script>
+                <script type="text/javascript">jwplayer.key="KzcW0VrDegOG/Vl8Wb9X3JLUql+72MdP1coaag==";</script>
 				<script type="text/javascript">
 					function BlockvideoPlay(d, c) {
 						var a = $("#" + c).outerWidth(), b;
+						a = 277;
 						640 < a && ( a = 640);
 						b = a;
 						a = Math.ceil(45 * a / 80) + 4;
@@ -24,26 +27,13 @@
 							height : a,
 							margin : "0 auto"
 						});
-						swfobject.embedSWF("{NV_BASE_SITEURL}themes/{TEMPLATE}/images/{MODULE_NAME}/player.swf", c, b, a, "10.0.0.0", !1, {
-							file : d,
-							backcolor : "0x000000",
-							frontcolor : "0x666666",
-							lightcolor : "0xFF6600",
-							width : b,
-							height : a,
-							controlbar : "over",
-							autostart : 0,
-							smoothing : 1,
-							autoscroll : 1,
-							stretching : "fill",
-							volume : 100,
-							largecontrols : 1
-						}, {
-							bgcolor : "#000000",
-							wmode : "window",
-							allowFullScreen : "true",
-							allowScriptAccess : "always"
-						});
+						
+						jwplayer(c).setup({
+				            file: d,
+				            width: b,
+				            height: a
+				        });																					
+						alert('123');
 						return !1
 					};
 		
