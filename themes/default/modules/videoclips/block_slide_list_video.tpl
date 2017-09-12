@@ -33,7 +33,6 @@
 				            width: b,
 				            height: a
 				        });																					
-						alert('123');
 						return !1
 					};
 		
