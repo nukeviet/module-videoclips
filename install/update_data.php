@@ -223,7 +223,6 @@ function nv_up_p2()
     );
 
     // Xóa file thừa do một số site cập nhật sớm
-    @nv_deletefile(NV_ROOTDIR . '/themes/default/css/fonts');
     @nv_deletefile(NV_ROOTDIR . '/themes/default/css/flexslider.css');
     @nv_deletefile(NV_ROOTDIR . '/themes/default/css/jquery.flexslider.js');
 
@@ -232,6 +231,9 @@ function nv_up_p2()
     @nv_deletefile(NV_ROOTDIR . '/modules/videoclips/blocks/.htaccess');
     @nv_deletefile(NV_ROOTDIR . '/modules/videoclips/funcs/.htaccess');
     @nv_deletefile(NV_ROOTDIR . '/modules/videoclips/language/.htaccess');
+    @nv_deletefile(NV_ROOTDIR . '/themes/admin_default/modules/videoclips/.htaccess');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/videoclips/player.swf');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/modules/videoclips/.htaccess');
 
     return $return;
 }
