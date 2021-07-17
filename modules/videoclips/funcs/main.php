@@ -55,10 +55,21 @@ if (isset($configMods['idhomeclips']) and $configMods['idhomeclips'] > 0) {
         }
     }
 }
-
+$configMods['otherClipsNum'] = 1;
 $base_url = array();
 $base_url['link'] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name;
 $base_url['amp'] = '/page-';
+
+// 1. URL chính tắc: $page_url, $base_url và $canonicalUrl
+$page_url = $base_url['link'];
+
+if (isset($array_op[0]) and substr($array_op[0], 0, 5) == 'page-') {
+    $pgnum = intval(substr($array_op[0], 5));
+}
+if ($pgnum > 1) {
+    $page_url .= '&amp;' . NV_OP_VARIABLE . '=page-' . $pgnum;
+}
+$canonicalUrl = getCanonicalUrl($page_url);
 
 $sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip a,
     " . NV_PREFIXLANG . "_" . $module_data . "_hit b
@@ -66,11 +77,15 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM " . NV_PREFIXLANG . "_" . $mo
     AND a.status=1
     ORDER BY a.id DESC
     LIMIT " . (($pgnum - 1) * $configMods['otherClipsNum']) . "," . $configMods['otherClipsNum'];
-
 $array_data = array();
 $result = $db->query($sql);
 $res = $db->query("SELECT FOUND_ROWS()");
 $all_page = $res->fetchColumn();
+
+//2.Đánh số trang
+$urlappend = '&amp;' . NV_OP_VARIABLE . '=page-';
+betweenURLs($pgnum, ceil($all_page/$configMods['otherClipsNum']), $base_url['link'], $urlappend, $prevPage, $nextPage);
+
 $all_page = intval($all_page);
 if ($all_page) {
     $numClips = 0;

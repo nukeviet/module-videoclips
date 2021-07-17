@@ -1,5 +1,5 @@
 <!-- BEGIN: main -->
-<script type="text/javascript" src="{NV_BASE_SITEURL}themes/{TEMPLATE}/images/{MODULE_FILE}/jwplayer/jwplayer.js"></script>
+<script type="text/javascript" src="{NV_STATIC_URL}themes/{TEMPLATE}/images/{MODULE_FILE}/jwplayer/jwplayer.js"></script>
 <script type="text/javascript">jwplayer.key="KzcW0VrDegOG/Vl8Wb9X3JLUql+72MdP1coaag==";</script>
 <div id="hot-news">
     <div class="panel panel-default news_column">
