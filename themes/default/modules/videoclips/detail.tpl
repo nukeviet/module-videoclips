@@ -1,7 +1,7 @@
 <!-- BEGIN: main -->
-<script type="text/javascript" src="{NV_BASE_SITEURL}themes/{TEMPLATE}/js/{MODULE_THEME}_jquery.autoresize.js"></script>
-<script type="text/javascript" src="{NV_BASE_SITEURL}themes/{TEMPLATE}/js/{MODULE_THEME}_jquery.matchHeight-min.js"></script>
-<script type="text/javascript" src="{NV_BASE_SITEURL}themes/{TEMPLATE}/images/{MODULE_THEME}/jwplayer/jwplayer.js"></script>
+<script type="text/javascript" src="{NV_STATIC_URL}themes/{TEMPLATE}/js/{MODULE_THEME}_jquery.autoresize.js"></script>
+<script type="text/javascript" src="{NV_STATIC_URL}themes/{TEMPLATE}/js/{MODULE_THEME}_jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="{NV_STATIC_URL}themes/{TEMPLATE}/images/{MODULE_THEME}/jwplayer/jwplayer.js"></script>
 <script type="text/javascript">jwplayer.key="KzcW0VrDegOG/Vl8Wb9X3JLUql+72MdP1coaag==";</script>
 <script type="text/javascript">
     var ratio = '{ratio}';
@@ -60,7 +60,7 @@
                 <!-- BEGIN: liketool1 -->
                 <div class="fl">
                     <div class="shareFeelings">{LANG.shareFeelings}</div>
-                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="like" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="15" height="14" /><span>{LANG.like}</span></a> <a class="likeButton" href="{DETAILCONTENT.url}"><img class="unlike" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="15" height="14" /><span>{LANG.unlike}</span></a> <a class="likeButton" href="{DETAILCONTENT.url}"><img class="broken" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="15" height="14" /><span>{LANG.broken}</span></a>
+                    <a class="likeButton" href="{DETAILCONTENT.url}"><img class="like" src="{NV_STATIC_URL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="15" height="14" /><span>{LANG.like}</span></a> <a class="likeButton" href="{DETAILCONTENT.url}"><img class="unlike" src="{NV_STATIC_URL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="15" height="14" /><span>{LANG.unlike}</span></a> <a class="likeButton" href="{DETAILCONTENT.url}"><img class="broken" src="{NV_STATIC_URL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="15" height="14" /><span>{LANG.broken}</span></a>
                 </div>
                 <style>
 .videoInfo .cont .cont2 {
@@ -123,7 +123,7 @@
                     <!-- BEGIN: liketool -->
                     <div style="float: right;">
                         <div class="image image0">
-                            <img id="imglike" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="1" />
+                            <img id="imglike" src="{NV_STATIC_URL}{NV_ASSETS_DIR}/images/pix.gif" alt="" width="1" />
                         </div>
                         <div class="likeDetail">
                             <div class="likeLeft">
