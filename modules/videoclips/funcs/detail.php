@@ -25,14 +25,9 @@ if (!$num) {
 
 $clip = $result->fetch();
 
-$base_url_rewrite = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=video-' . $clip['alias'] . $global_config['rewrite_exturl'], true);
 // 1. URL chính tắc: $page_url, $base_url và $canonicalUrl
-$page_url = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=video-' . $clip['alias'] . $global_config['rewrite_exturl'];
+$page_url = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=video-' . $clip['alias'] . $global_config['rewrite_exturl'];
 $canonicalUrl = getCanonicalUrl($page_url);
-
-if (isset($array_op[1])) {
-    nv_redirect_location($base_url_rewrite);
-}
 
 // comment
 if (isset($site_mods['comment']) and isset($module_config[$module_name]['activecomm'])) {
