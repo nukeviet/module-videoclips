@@ -55,9 +55,6 @@ $base_url['amp'] = "/page-";
 // 1. URL chính tắc: $page_url, $base_url và $canonicalUrl
 $page_url = $base_url['link'];
 
-if (isset($array_op[0]) and substr($array_op[0], 0, 5) == 'page-') {
-    $pgnum = intval(substr($array_op[0], 5));
-}
 if ($pgnum > 1) {
     $page_url .= '&amp;' . NV_OP_VARIABLE . '=page-' . $pgnum;
 }
@@ -85,7 +82,7 @@ $all_page = $res->fetchColumn();
 $all_page = intval($all_page);
 
 //2.Đánh số trang
-$urlappend = '&amp;' . NV_OP_VARIABLE . '=page-';
+$urlappend = '/page-';
 betweenURLs($pgnum, ceil($all_page/$configMods['otherClipsNum']), $base_url['link'], $urlappend, $prevPage, $nextPage);
 
 if ($all_page) {

@@ -55,17 +55,14 @@ if (isset($configMods['idhomeclips']) and $configMods['idhomeclips'] > 0) {
         }
     }
 }
-$configMods['otherClipsNum'] = 1;
+
 $base_url = array();
 $base_url['link'] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name;
 $base_url['amp'] = '/page-';
 
 // 1. URL chính tắc: $page_url, $base_url và $canonicalUrl
 $page_url = $base_url['link'];
-
-if (isset($array_op[0]) and substr($array_op[0], 0, 5) == 'page-') {
-    $pgnum = intval(substr($array_op[0], 5));
-}
+    
 if ($pgnum > 1) {
     $page_url .= '&amp;' . NV_OP_VARIABLE . '=page-' . $pgnum;
 }

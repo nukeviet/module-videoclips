@@ -27,7 +27,7 @@ $clip = $result->fetch();
 
 $base_url_rewrite = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=video-' . $clip['alias'] . $global_config['rewrite_exturl'], true);
 // 1. URL chính tắc: $page_url, $base_url và $canonicalUrl
-$page_url = $base_url_rewrite;
+$page_url = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=video-' . $clip['alias'] . $global_config['rewrite_exturl'];
 $canonicalUrl = getCanonicalUrl($page_url);
 
 if (isset($array_op[1])) {
