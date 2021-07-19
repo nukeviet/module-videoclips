@@ -92,7 +92,7 @@ function nv_extKeywords($keywords)
 $configMods = array();
 $configMods = $module_config[$module_name];
 if (!empty($configMods['playerSkin'])) {
-    $configMods['playerSkin'] = ",skin:\"" . NV_BASE_SITEURL . NV_ASSETS_DIR . "images/jwplayer/skin/" . $configMods['playerSkin'] . ".zip\"";
+    $configMods['playerSkin'] = ",skin:\"" . NV_STATIC_URL . NV_ASSETS_DIR . "images/jwplayer/skin/" . $configMods['playerSkin'] . ".zip\"";
 }
 
 $page_title = $module_info['site_title'];

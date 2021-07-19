@@ -52,6 +52,14 @@ $base_url = array();
 $base_url['link'] = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $topic['alias'];
 $base_url['amp'] = "/page-";
 
+// 1. URL chính tắc: $page_url, $base_url và $canonicalUrl
+$page_url = $base_url['link'];
+
+if ($pgnum > 1) {
+    $page_url .= '&amp;' . NV_OP_VARIABLE . '=page-' . $pgnum;
+}
+$canonicalUrl = getCanonicalUrl($page_url);
+
 $sql = "SELECT SQL_CALC_FOUND_ROWS a.*,b.view FROM `" . NV_PREFIXLANG . "_" . $module_data . "_clip` a,
     `" . NV_PREFIXLANG . "_" . $module_data . "_hit` b
     WHERE a.tid=" . $db->quote($topic['id']) . "
@@ -72,6 +80,11 @@ $result = $db->query($sql);
 $res = $db->query("SELECT FOUND_ROWS()");
 $all_page = $res->fetchColumn();
 $all_page = intval($all_page);
+
+//2.Đánh số trang
+$urlappend = '/page-';
+betweenURLs($pgnum, ceil($all_page/$configMods['otherClipsNum']), $base_url['link'], $urlappend, $prevPage, $nextPage);
+
 if ($all_page) {
     $numClips = 0;
     while ($row = $result->fetch()) {
