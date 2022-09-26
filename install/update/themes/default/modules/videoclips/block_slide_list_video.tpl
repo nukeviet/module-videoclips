@@ -1,7 +1,7 @@
 <!-- BEGIN: main -->
-<link rel="stylesheet" href="{NV_BASE_SITEURL}themes/{TEMPLATE}/images/{MODULE_FILE}/flexslider/flexslider.css" type="text/css" media="screen" />
-<script defer src="{NV_BASE_SITEURL}themes/{TEMPLATE}/images/{MODULE_FILE}/flexslider/jquery.flexslider.js"></script>
-<script type="text/javascript" src="{NV_BASE_SITEURL}themes/{TEMPLATE}/images/{MODULE_FILE}/jwplayer/jwplayer.js"></script>
+<link rel="stylesheet" href="{NV_STATIC_URL}themes/{TEMPLATE}/images/{MODULE_FILE}/flexslider/flexslider.css" type="text/css" media="screen" />
+<script defer src="{NV_STATIC_URL}themes/{TEMPLATE}/images/{MODULE_FILE}/flexslider/jquery.flexslider.js"></script>
+<script type="text/javascript" src="{NV_STATIC_URL}themes/{TEMPLATE}/images/{MODULE_FILE}/jwplayer/jwplayer.js"></script>
 <script type="text/javascript">jwplayer.key="KzcW0VrDegOG/Vl8Wb9X3JLUql+72MdP1coaag==";</script>
 
 <div id="videotop{BID}" class="flexslider videotop col-md-24">

@@ -8,7 +8,9 @@
  * @Createdate Thu, 20 Sep 2012 04:05:46 GMT
  */
 
-if (!defined('NV_MAINFILE')) die('Stop!!!');
+if (!defined('NV_ADMIN') or !defined('NV_MAINFILE')) {
+    die('Stop!!!');
+}
 
 $lang_translator['author'] = 'VINADES.,JSC (contact@vinades.vn)';
 $lang_translator['createdate'] = '20/09/2012, 04:05';
@@ -22,6 +24,9 @@ $lang_module['topic'] = 'Quản lý thể loại';
 $lang_module['config'] = 'Cấu hình';
 $lang_module['save'] = 'Lưu';
 $lang_module['search'] = 'Tìm kiếm';
+$lang_module['viewhits'] = 'Lượt xem';
+$lang_module['like'] = 'Thích';
+$lang_module['dislike'] = 'Không thích';
 
 $lang_module['topic_management'] = 'Quản lý thể loại';
 $lang_module['addtopic_titlebox'] = 'Thêm thể loại mới';
@@ -74,6 +79,10 @@ $lang_module['videoClip'] = 'Video-clip';
 $lang_module['saveAndChecked'] = 'Thông qua và lưu';
 $lang_module['Remove'] = 'Loại khỏi danh sách';
 $lang_module['homeclips'] = 'Video hiển thị tại trang chủ module';
+$lang_module['viewtype'] = 'Hiển thị trang chủ';
+$lang_module['viewtype_viewlist'] = 'Danh sách';
+$lang_module['viewtype_viewgrid'] = 'Lưới';
+$lang_module['liketool'] = 'Sử dụng tính năng Like video';
 
 $lang_module['error1'] = 'Lỗi! Vui lòng điền nội dung vào ô Tiêu đề';
 $lang_module['error2'] = 'Lỗi! Thể loại mà bạn chọn không tồn tại!';
@@ -83,6 +92,9 @@ $lang_module['error5'] = 'Lỗi! Tập tin video chưa được xác định';
 $lang_module['error6'] = 'Lỗi! Hình minh họa chưa được xác định';
 $lang_module['error7'] = 'Lỗi! Vui lòng điền nội dung vào ô Mô tả ngắn gọn';
 $lang_module['error_required_alias'] = 'Lỗi: bạn cần nhập dữ liệu cho Liên kết tĩnh';
+$lang_module['error_regex_alias'] = 'Lỗi: Liên kết tĩnh không được bắt đầu bằng video- hoặc kết thúc bằng -video';
 
 $lang_module['alias'] = 'Liên kết tĩnh';
 $lang_module['per_title'] = 'Số lượng ký tự tiêu đề bị cắt';
+$lang_module['ratio_w_h'] = 'Tỉ lệ chiều rộng: chiều cao';
+$lang_module['hint_ratio'] = 'Nhập tỉ lệ theo định dạng XX:YY trong đó XX và YY là số tự nhiên như: 4:3';
