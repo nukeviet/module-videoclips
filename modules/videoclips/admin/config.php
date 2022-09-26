@@ -14,7 +14,7 @@ $page_title = $lang_module['config'];
 $skins = nv_scandir(NV_ROOTDIR . "/images/jwplayer/skin/", "/^[a-zA-Z0-9\_\-\.]+\.zip$/", 1);
 
 $array_config = array();
-if ($nv_Request->isset_request('submit', 'post')) {
+if ($nv_Request->isset_request('btnsubmit', 'post')) {
     $array_config['liketool'] = $nv_Request->get_int('liketool', 'post', 0);
     $array_config['viewtype'] = $nv_Request->get_title('viewtype', 'post', 'viewlist');
     $array_config['otherClipsNum'] = $nv_Request->get_int('otherClipsNum', 'post', 0);

@@ -147,7 +147,7 @@
                 <td colspan="2">{CONTENT}</td>
             </tr>
             <tr>
-                <td colspan="2" class="text-center"><input name="redirect" type="hidden" value="{POST.redirect}" /> <input class="btn btn-primary" name="submit" type="submit" value="{LANG.save}" /></td>
+                <td colspan="2" class="text-center"><input name="redirect" type="hidden" value="{POST.redirect}" /> <input class="btn btn-primary" name="btnsubmit" type="submit" value="{LANG.save}" /></td>
             </tr>
         </tbody>
     </table>

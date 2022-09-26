@@ -88,7 +88,7 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
         $row = $result->fetch();
     }
 
-    if ($nv_Request->isset_request('submit', 'post')) {
+    if ($nv_Request->isset_request('btnsubmit', 'post')) {
         $post['tid'] = $nv_Request->get_int('tid', 'post', 0);
         $post['title'] = $nv_Request->get_title('title', 'post', '', 1);
         $post['alias'] = $nv_Request->get_title('alias', 'post', '');

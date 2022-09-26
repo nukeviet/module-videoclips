@@ -67,7 +67,7 @@
         </table>
     </div>
     <div style="width: 200px; margin: 10px auto; text-align: center;">
-        <input class="btn btn-primary" type="submit" name="submit" value="{LANG.save}" style="width: 100px;" />
+        <input class="btn btn-primary" type="submit" name="btnsubmit" value="{LANG.save}" style="width: 100px;" />
     </div>
 </form>
 <script type="text/javascript">
