@@ -1,6 +1,6 @@
-# Hướng dẫn cập nhật module videoclips lên phiên bản 4.3.00
+# Hướng dẫn cập nhật module videoclips lên phiên bản 4.5.02
 
-Gói cập nhật này hỗ trợ các module videoclips sau: 4.0.29, 4.1.00, 4.1.01, 4.2.01, 4.2.02, 4.2.03
+Gói cập nhật này hỗ trợ các module videoclips sau: 4.0.29, 4.1.00, 4.1.01, 4.2.01, 4.2.02, 4.2.03, 4.3.00, 4.4.02, 4.5.00
 
 ## Bước 1: Cập nhật module
 
@@ -10,7 +10,7 @@ Gói cập nhật này hỗ trợ các module videoclips sau: 4.0.29, 4.1.00, 4.
 
 ### Tùy chọn 2: Cập nhật thủ công
 
-Tải gói cập nhật tại https://github.com/nukeviet/module-videoclips/releases/download/4.3.00/update-to-4.3.00.zip, sau đó giải nén và upload lên site đúng cấu trúc (thư mục install nhập vào thư mục install trên website).
+Tải gói cập nhật tại https://github.com/nukeviet/module-videoclips/archive/refs/heads/to-4.5.02.zip, sau đó giải nén và upload lên site đúng cấu trúc (thư mục install nhập vào thư mục install trên website).
 Đăng nhập quản trị tối cao, nhận được thông báo cập nhật, nhấp vào link để thực hiện cập nhật.
 
 ## Bước 2: Sau cập nhật

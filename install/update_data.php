@@ -8,8 +8,9 @@
  * @Createdate Thu, 20 Sep 2012 04:05:46 GMT
  */
 
-if (!defined('NV_IS_UPDATE'))
+if (!defined('NV_IS_UPDATE')) {
     die('Stop!!!');
+}
 
 $nv_update_config = array();
 
@@ -17,17 +18,17 @@ $nv_update_config = array();
 $nv_update_config['type'] = 1;
 
 // ID goi cap nhat
-$nv_update_config['packageID'] = 'NVUDVIDEOCLIPS4300';
+$nv_update_config['packageID'] = 'NVUDVIDEOCLIPS4502';
 
 // Cap nhat cho module nao, de trong neu la cap nhat NukeViet, ten thu muc module neu la cap nhat module
 $nv_update_config['formodule'] = 'videoclips';
 
 // Thong tin phien ban, tac gia, ho tro
-$nv_update_config['release_date'] = 1486936962;
+$nv_update_config['release_date'] = 1664008363;
 $nv_update_config['author'] = 'NGUYEN ANH TU (anhtunguyen71@gmail.com)';
-$nv_update_config['support_website'] = 'https://github.com/nukeviet/module-videoclips/tree/to-4.3.00';
-$nv_update_config['to_version'] = '4.3.00';
-$nv_update_config['allow_old_version'] = array('4.0.29', '4.1.00', '4.1.01', '4.2.01', '4.2.02', '4.2.03');
+$nv_update_config['support_website'] = 'https://github.com/nukeviet/module-videoclips/tree/to-4.5.02';
+$nv_update_config['to_version'] = '4.5.02';
+$nv_update_config['allow_old_version'] = array('4.0.29', '4.1.00', '4.1.01', '4.2.01', '4.2.02', '4.2.03', '4.3.00', '4.4.02', '4.5.00');
 
 // 0:Nang cap bang tay, 1:Nang cap tu dong, 2:Nang cap nua tu dong
 $nv_update_config['update_auto_type'] = 1;
@@ -38,6 +39,9 @@ $nv_update_config['lang']['vi'] = array();
 // Tiếng Việt
 $nv_update_config['lang']['vi']['nv_up_p1'] = 'Chuyển cấu hình sang CSDL';
 $nv_update_config['lang']['vi']['nv_up_p2'] = 'Xóa dữ liệu thừa';
+$nv_update_config['lang']['vi']['nv_up_p3'] = 'Thêm cấu hình phiên bản 4.3.04';
+$nv_update_config['lang']['vi']['nv_up_p4'] = 'Thêm cấu hình phiên bản 4.4.02';
+$nv_update_config['lang']['vi']['nv_up_p5'] = 'Thêm cấu hình phiên bản 4.5.00';
 $nv_update_config['lang']['vi']['nv_up_finish'] = 'Đánh dấu phiên bản mới';
 
 $nv_update_config['tasklist'] = array();
@@ -54,7 +58,25 @@ $nv_update_config['tasklist'][] = array(
     'f' => 'nv_up_p2'
 );
 $nv_update_config['tasklist'][] = array(
-    'r' => '4.3.00',
+    'r' => '4.4.02',
+    'rq' => 1,
+    'l' => 'nv_up_p3',
+    'f' => 'nv_up_p3'
+);
+$nv_update_config['tasklist'][] = array(
+    'r' => '4.4.02',
+    'rq' => 1,
+    'l' => 'nv_up_p4',
+    'f' => 'nv_up_p4'
+);
+$nv_update_config['tasklist'][] = array(
+    'r' => '4.5.00',
+    'rq' => 1,
+    'l' => 'nv_up_p5',
+    'f' => 'nv_up_p5'
+);
+$nv_update_config['tasklist'][] = array(
+    'r' => '4.5.02',
     'rq' => 1,
     'l' => 'nv_up_finish',
     'f' => 'nv_up_finish'
@@ -139,7 +161,7 @@ function nv_up_p1()
             $configMods['commNum'] = 20;
 
             if (file_exists(NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_info['module_title'] . ".php")) {
-                require (NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_info['module_title'] . ".php");
+                require(NV_ROOTDIR . "/" . NV_DATADIR . "/config_module-" . $module_info['module_title'] . ".php");
             }
 
             try {
@@ -239,6 +261,138 @@ function nv_up_p2()
 }
 
 /**
+ * nv_up_p3()
+ *
+ * @return
+ *
+ */
+function nv_up_p3()
+{
+    global $nv_update_baseurl, $db, $db_config, $nv_Cache, $array_modlang_update;
+
+    $return = array(
+        'status' => 1,
+        'complete' => 1,
+        'next' => 1,
+        'link' => 'NO',
+        'lang' => 'NO',
+        'message' => ''
+    );
+
+    foreach ($array_modlang_update as $lang => $array_mod) {
+        foreach ($array_mod['mod'] as $module_info) {
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
+
+            try {
+                $db->query("ALTER TABLE " . $table_prefix . "_clip 
+                    ADD userid MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0' AFTER tid,
+                    ADD INDEX userid (userid);");
+            } catch (PDOException $e) {
+                trigger_error($e->getMessage());
+            }
+
+            try {
+                $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
+                    lang, module, config_name, config_value
+                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'viewtype', 'viewgrid')");
+            } catch (PDOException $e) {
+                trigger_error($e->getMessage());
+            }
+
+            try {
+                $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
+                    lang, module, config_name, config_value
+                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'liketool', '1')");
+            } catch (PDOException $e) {
+                trigger_error($e->getMessage());
+            }
+        }
+    }
+
+    return $return;
+}
+
+/**
+ * nv_up_p4()
+ *
+ * @return
+ *
+ */
+function nv_up_p4()
+{
+    global $nv_update_baseurl, $db, $db_config, $nv_Cache, $array_modlang_update;
+
+    $return = array(
+        'status' => 1,
+        'complete' => 1,
+        'next' => 1,
+        'link' => 'NO',
+        'lang' => 'NO',
+        'message' => ''
+    );
+
+    foreach ($array_modlang_update as $lang => $array_mod) {
+        foreach ($array_mod['mod'] as $module_info) {
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
+
+            try {
+                $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
+                    lang, module, config_name, config_value
+                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'ratio_w_h', '16:9')");
+            } catch (PDOException $e) {
+                trigger_error($e->getMessage());
+            }
+        }
+    }
+
+    return $return;
+}
+
+/**
+ * nv_up_p5()
+ *
+ * @return
+ *
+ */
+function nv_up_p5()
+{
+    global $nv_update_baseurl, $db, $db_config, $nv_Cache, $array_modlang_update;
+
+    $return = array(
+        'status' => 1,
+        'complete' => 1,
+        'next' => 1,
+        'link' => 'NO',
+        'lang' => 'NO',
+        'message' => ''
+    );
+
+    foreach ($array_modlang_update as $lang => $array_mod) {
+        foreach ($array_mod['mod'] as $module_info) {
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
+
+            try {
+                $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
+                    lang, module, config_name, config_value
+                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'captcha_area_comm', '1')");
+            } catch (PDOException $e) {
+                trigger_error($e->getMessage());
+            }
+
+            try {
+                $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
+                    lang, module, config_name, config_value
+                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'captcha_type_comm', 'captcha')");
+            } catch (PDOException $e) {
+                trigger_error($e->getMessage());
+            }
+        }
+    }
+
+    return $return;
+}
+
+/**
  * nv_up_finish()
  *
  * @return
@@ -265,14 +419,14 @@ function nv_up_finish()
             $db->query("INSERT INTO " . $db_config['prefix'] . "_setup_extensions (
                 id, type, title, is_sys, is_virtual, basename, table_prefix, version, addtime, author, note
             ) VALUES (
-                64, 'module', 'videoclips', 0, 1, 'Videoclips', 'videoclips', '" . $nv_update_config['to_version'] . " " . $nv_update_config['release_date'] . "', " . NV_CURRENTTIME . ", '" . $nv_update_config['author'] . "',
-                'Module Video clips được viết hoàn toàn mới, đạt các chuẩn code mới nhất của NukeViet, tương thích với nhiều giao diện web khác nhau và đặc biệt: Tính năng gọn nhẹ, đủ dùng'
+                64, 'module', '" . $nv_update_config['formodule'] . "', 0, 1, '" . $nv_update_config['formodule'] . "', '" . $nv_update_config['formodule'] . "', '" . $nv_update_config['to_version'] . " " . $nv_update_config['release_date'] . "', " . NV_CURRENTTIME . ", 'VINADES.,JSC (contact@vinades.vn)',
+                ''
             )");
         } else {
             $db->query("UPDATE " . $db_config['prefix'] . "_setup_extensions SET
                 id=64,
                 version='" . $version . "',
-                author='" . $nv_update_config['author'] . "'
+                author='VINADES.,JSC (contact@vinades.vn)'
             WHERE basename='" . $nv_update_config['formodule'] . "' AND type='module'");
         }
     } catch (PDOException $e) {
@@ -280,5 +434,6 @@ function nv_up_finish()
     }
 
     $nv_Cache->delAll(true);
+
     return $return;
 }
