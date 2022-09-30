@@ -150,7 +150,7 @@ function nv_up_p1()
 
     foreach ($array_modlang_update as $lang => $array_mod) {
         foreach ($array_mod['mod'] as $module_info) {
-            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_title'];
 
             $configMods['idhomeclips'] = 0;
             $configMods['otherClipsNum'] = 16;
@@ -281,7 +281,7 @@ function nv_up_p3()
 
     foreach ($array_modlang_update as $lang => $array_mod) {
         foreach ($array_mod['mod'] as $module_info) {
-            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_title'];
 
             try {
                 $db->query("ALTER TABLE " . $table_prefix . "_clip 
@@ -294,7 +294,7 @@ function nv_up_p3()
             try {
                 $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
                     lang, module, config_name, config_value
-                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'viewtype', 'viewgrid')");
+                ) VALUES ('" . $lang . "', '" . $module_info['module_title'] . "', 'viewtype', 'viewgrid')");
             } catch (PDOException $e) {
                 trigger_error($e->getMessage());
             }
@@ -302,7 +302,7 @@ function nv_up_p3()
             try {
                 $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
                     lang, module, config_name, config_value
-                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'liketool', '1')");
+                ) VALUES ('" . $lang . "', '" . $module_info['module_title'] . "', 'liketool', '1')");
             } catch (PDOException $e) {
                 trigger_error($e->getMessage());
             }
@@ -333,12 +333,12 @@ function nv_up_p4()
 
     foreach ($array_modlang_update as $lang => $array_mod) {
         foreach ($array_mod['mod'] as $module_info) {
-            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_title'];
 
             try {
                 $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
                     lang, module, config_name, config_value
-                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'ratio_w_h', '16:9')");
+                ) VALUES ('" . $lang . "', '" . $module_info['module_title'] . "', 'ratio_w_h', '16:9')");
             } catch (PDOException $e) {
                 trigger_error($e->getMessage());
             }
@@ -369,12 +369,12 @@ function nv_up_p5()
 
     foreach ($array_modlang_update as $lang => $array_mod) {
         foreach ($array_mod['mod'] as $module_info) {
-            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_title'];
 
             try {
                 $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
                     lang, module, config_name, config_value
-                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'captcha_area_comm', '1')");
+                ) VALUES ('" . $lang . "', '" . $module_info['module_title'] . "', 'captcha_area_comm', '1')");
             } catch (PDOException $e) {
                 trigger_error($e->getMessage());
             }
@@ -382,7 +382,7 @@ function nv_up_p5()
             try {
                 $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
                     lang, module, config_name, config_value
-                ) VALUES ('" . $lang . "', '" . $module_info['module_data'] . "', 'captcha_type_comm', 'captcha')");
+                ) VALUES ('" . $lang . "', '" . $module_info['module_title'] . "', 'captcha_type_comm', 'captcha')");
             } catch (PDOException $e) {
                 trigger_error($e->getMessage());
             }
