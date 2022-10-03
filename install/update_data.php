@@ -150,7 +150,7 @@ function nv_up_p1()
 
     foreach ($array_modlang_update as $lang => $array_mod) {
         foreach ($array_mod['mod'] as $module_info) {
-            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_title'];
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
 
             $configMods['idhomeclips'] = 0;
             $configMods['otherClipsNum'] = 16;
@@ -281,7 +281,7 @@ function nv_up_p3()
 
     foreach ($array_modlang_update as $lang => $array_mod) {
         foreach ($array_mod['mod'] as $module_info) {
-            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_title'];
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
 
             try {
                 $db->query("ALTER TABLE " . $table_prefix . "_clip 
@@ -333,7 +333,7 @@ function nv_up_p4()
 
     foreach ($array_modlang_update as $lang => $array_mod) {
         foreach ($array_mod['mod'] as $module_info) {
-            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_title'];
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
 
             try {
                 $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
@@ -369,7 +369,7 @@ function nv_up_p5()
 
     foreach ($array_modlang_update as $lang => $array_mod) {
         foreach ($array_mod['mod'] as $module_info) {
-            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_title'];
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
 
             try {
                 $db->query("INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (
