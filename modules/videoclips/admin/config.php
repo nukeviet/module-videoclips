@@ -9,7 +9,7 @@
  */
 if (!defined('NV_IS_FILE_ADMIN')) die('Stop!!!');
 
-$page_title = $lang_module['config'];
+$page_title = $nv_Lang->getModule('config');
 
 $skins = nv_scandir(NV_ROOTDIR . "/images/jwplayer/skin/", "/^[a-zA-Z0-9\_\-\.]+\.zip$/", 1);
 
@@ -46,7 +46,7 @@ $configMods['playerAutostart_checked'] = ($configMods['playerAutostart'] == 1) ?
 $configMods['ck_liketool'] = ($configMods['liketool'] == 1) ? ' checked="checked"' : '';
 
 $xtpl = new XTemplate($op . ".tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file);
-$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 $xtpl->assign('FORM_ACTION', NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op);
 $xtpl->assign('CONFIGMODULE', $configMods);
 $xtpl->assign('CLEAN_TITLE_VIDEO', $configMods['clean_title_video']);
@@ -80,8 +80,8 @@ foreach ($skins as $skin) {
 }
 
 $array_viewtype = array(
-    'viewlist' => $lang_module['viewtype_viewlist'],
-    'viewgrid' => $lang_module['viewtype_viewgrid']
+    'viewlist' => $nv_Lang->getModule('viewtype_viewlist'),
+    'viewgrid' => $nv_Lang->getModule('viewtype_viewgrid')
 );
 foreach ($array_viewtype as $index => $value) {
     $sl = $index == $configMods['viewtype'] ? 'selected="selected"' : '';

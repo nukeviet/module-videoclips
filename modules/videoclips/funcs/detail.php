@@ -19,7 +19,7 @@ AND a.status=1 AND a.id=b.cid LIMIT 1";
 $result = $db->query($sql);
 $num = $result->rowCount();
 if (!$num) {
-    nv_info_die($lang_global['error_404_title'], $lang_global['site_info'], $lang_global['error_404_title'], 404);
+    nv_info_die($nv_Lang->getGlobal('error_404_title'), $nv_Lang->getGlobal('site_info'), $nv_Lang->getGlobal('error_404_title'), 404);
     die();
 }
 
@@ -107,7 +107,7 @@ $array_mod_title[] = array( //
 $cpgnum = 0;
 
 $xtpl = new XTemplate("detail.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_info['module_theme']);
-$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 $xtpl->assign('TEMPLATE', $module_info['template']);
 $xtpl->assign('MODULE_THEME', $module_info['module_theme']);
 $xtpl->assign('MODULE_FILE', $module_file);

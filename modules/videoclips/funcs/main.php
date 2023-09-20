@@ -28,7 +28,7 @@ if (isset($array_op[1]) or $pgnum < 1 or ($pgnum < 2 and $issetPgnum)) {
 }
 
 $xtpl = new XTemplate("main.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_info['module_theme']);
-$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 $xtpl->assign('NV_BASE_SITEURL', NV_BASE_SITEURL);
 $xtpl->assign('MODULECONFIG', $configMods);
 $xtpl->assign('TEMPLATE', $module_info['template']);

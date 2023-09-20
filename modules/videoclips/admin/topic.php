@@ -96,7 +96,7 @@ $error = "";
 if ($nv_Request->isset_request('add', 'get')) {
     $array = array();
     $array['id'] = $nv_Request->get_int('id', 'post,get', 0);
-    $page_title = $lang_module['addtopic_titlebox'];
+    $page_title = $nv_Lang->getModule('addtopic_titlebox');
 
     $is_error = false;
 
@@ -109,14 +109,14 @@ if ($nv_Request->isset_request('add', 'get')) {
         $array['alias'] = (empty($row['alias'])) ? change_alias($array['title']) : change_alias($array['alias']);
 
         if (empty($array['alias'])) {
-            $error = $lang_module['error_required_alias'];
+            $error = $nv_Lang->getModule('error_required_alias');
             $is_error = true;
         } elseif (preg_match('/^video\-/i', $array['alias']) or preg_match('/\-video$/i', $array['alias'])) {
-            $error = $lang_module['error_regex_alias'];
+            $error = $nv_Lang->getModule('error_regex_alias');
             $is_error = true;
         }
         if (empty($array['title'])) {
-            $error = $lang_module['error1'];
+            $error = $nv_Lang->getModule('error1');
             $is_error = true;
         } elseif (!empty($array['parentid'])) {
             $sql = "SELECT COUNT(*) AS count FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id=" . $array['parentid'];
@@ -124,7 +124,7 @@ if ($nv_Request->isset_request('add', 'get')) {
             $count = $result->fetchColumn();
 
             if (!$count) {
-                $error = $lang_module['error2'];
+                $error = $nv_Lang->getModule('error2');
                 $is_error = true;
             }
         }
@@ -171,10 +171,10 @@ if ($nv_Request->isset_request('add', 'get')) {
             $tid = $db->insert_id($sql);
 
             if (!$tid) {
-                $error = $lang_module['error4'];
+                $error = $nv_Lang->getModule('error4');
                 $is_error = true;
             } else {
-                nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['addtopic_titlebox'], "ID " . $tid, $admin_info['userid']);
+                nv_insert_logs(NV_LANG_DATA, $module_name, $nv_Lang->getModule('addtopic_titlebox'), "ID " . $tid, $admin_info['userid']);
                 Header("Location: " . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op);
                 exit();
             }
@@ -194,7 +194,7 @@ if ($nv_Request->isset_request('add', 'get')) {
     $listTopics = array(
         array(
             'id' => 0,
-            'name' => $lang_module['is_maintopic'],
+            'name' => $nv_Lang->getModule('is_maintopic'),
             'selected' => ""
         )
     );
@@ -202,7 +202,7 @@ if ($nv_Request->isset_request('add', 'get')) {
 
     $xtpl = new XTemplate("topic_add.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file);
     $xtpl->assign('FORM_ACTION', NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;add=1");
-    $xtpl->assign('LANG', $lang_module);
+    $xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
     $xtpl->assign('UPLOADS_DIR_USER', NV_UPLOADS_DIR . '/' . $module_upload);
     $xtpl->assign('UPLOAD_CURRENT', NV_UPLOADS_DIR . '/' . $module_upload);
     $xtpl->assign('DATA', $array);
@@ -231,7 +231,7 @@ if ($nv_Request->isset_request('add', 'get')) {
 
 // Sua the loai
 if ($nv_Request->isset_request('edit', 'get')) {
-    $page_title = $lang_module['edittopic_titlebox'];
+    $page_title = $nv_Lang->getModule('edittopic_titlebox');
 
     $tid = $nv_Request->get_int('tid', 'get', 0);
 
@@ -263,10 +263,10 @@ if ($nv_Request->isset_request('edit', 'get')) {
         $array['alias'] = (empty($array['alias'])) ? change_alias($array['title']) : change_alias($array['alias']);
 
         if (empty($array['title'])) {
-            $error = $lang_module['error1'];
+            $error = $nv_Lang->getModule('error1');
             $is_error = true;
         } elseif (preg_match('/^video\-/i', $array['alias']) or preg_match('/\-video$/i', $array['alias'])) {
-            $error = $lang_module['error_regex_alias'];
+            $error = $nv_Lang->getModule('error_regex_alias');
             $is_error = true;
         }else {
             if (!empty($array['parentid'])) {
@@ -275,7 +275,7 @@ if ($nv_Request->isset_request('edit', 'get')) {
                 $count = $result->fetchColumn();
 
                 if (!$count) {
-                    $error = $lang_module['error2'];
+                    $error = $nv_Lang->getModule('error2');
                     $is_error = true;
                 }
             }
@@ -286,7 +286,7 @@ if ($nv_Request->isset_request('edit', 'get')) {
                 $count = $result->fetchColumn();
 
                 if ($count) {
-                    $error = $lang_module['error3'];
+                    $error = $nv_Lang->getModule('error3');
                     $is_error = true;
                 }
             }
@@ -335,14 +335,14 @@ if ($nv_Request->isset_request('edit', 'get')) {
             $result = $db->query($sql);
 
             if (!$result) {
-                $error = $lang_module['error4'];
+                $error = $nv_Lang->getModule('error4');
                 $is_error = true;
             } else {
                 if ($array['parentid'] != $row['parentid']) {
                     nv_FixWeightTopic($row['parentid']);
                 }
 
-                nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['edittopic_titlebox'], "ID " . $tid, $admin_info['userid']);
+                nv_insert_logs(NV_LANG_DATA, $module_name, $nv_Lang->getModule('edittopic_titlebox'), "ID " . $tid, $admin_info['userid']);
                 Header("Location: " . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op);
                 exit();
             }
@@ -362,7 +362,7 @@ if ($nv_Request->isset_request('edit', 'get')) {
     $listTopics = array(
         array(
             'id' => 0,
-            'name' => $lang_module['is_maintopic'],
+            'name' => $nv_Lang->getModule('is_maintopic'),
             'selected' => ""
         )
     );
@@ -370,7 +370,7 @@ if ($nv_Request->isset_request('edit', 'get')) {
 
     $xtpl = new XTemplate("topic_add.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file);
     $xtpl->assign('FORM_ACTION', NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;edit=1&amp;tid=" . $tid);
-    $xtpl->assign('LANG', $lang_module);
+    $xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
     $xtpl->assign('UPLOADS_DIR_USER', NV_UPLOADS_DIR . '/' . $module_name);
     $xtpl->assign('UPLOAD_CURRENT', NV_UPLOADS_DIR . '/' . $module_name);
     $xtpl->assign('DATA', $array);
@@ -478,7 +478,7 @@ if ($nv_Request->isset_request('changestatus', 'post,get')) {
 }
 
 // Danh sach chu de
-$page_title = $lang_module['topic_management'];
+$page_title = $nv_Lang->getModule('topic_management');
 
 $pid = $nv_Request->get_int('pid', 'get', 0);
 $q = $nv_Request->get_title('q', 'get', '');
@@ -506,11 +506,11 @@ if ($pid) {
     $sql2 = "SELECT title,parentid FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id=" . $pid;
     $result2 = $db->query($sql2);
     list ($parentid, $parentid2) = $result2->fetch(3);
-    $caption = sprintf($lang_module['listSubTopic'], $parentid);
+    $caption = sprintf($nv_Lang->getModule('listSubTopic'), $parentid);
     $parentid = "<a href=\"" . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;pid=" . $parentid2 . "\">" . $parentid . "</a>";
 } else {
-    $caption = $lang_module['listMainTopic'];
-    $parentid = $lang_module['is_maintopic'];
+    $caption = $nv_Lang->getModule('listMainTopic');
+    $parentid = $nv_Lang->getModule('is_maintopic');
 }
 
 $list = array();
@@ -519,7 +519,7 @@ $a = 0;
 while ($row = $result->fetch()) {
     $numsub = $db->query("SELECT id FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE parentid=" . $row['id'])->rowCount();
     if ($numsub) {
-        $numsub = " (<a href=\"" . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;pid=" . $row['id'] . "\">" . $numsub . " " . $lang_module['subtopic'] . "</a>)";
+        $numsub = " (<a href=\"" . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;pid=" . $row['id'] . "\">" . $numsub . " " . $nv_Lang->getModule('subtopic') . "</a>)";
     } else {
         $numsub = "";
     }
@@ -550,8 +550,8 @@ while ($row = $result->fetch()) {
 $xtpl = new XTemplate("topic_list.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file);
 $xtpl->assign('ADD_NEW_TOPIC', NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;add=1");
 $xtpl->assign('TABLE_CAPTION', $caption);
-$xtpl->assign('GLANG', $lang_global);
-$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('GLANG', \NukeViet\Core\Language::$lang_global);
+$xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 $xtpl->assign('NV_LANG_VARIABLE', NV_LANG_VARIABLE);
 $xtpl->assign('NV_LANG_DATA', NV_LANG_DATA);
 $xtpl->assign('NV_BASE_ADMINURL', NV_BASE_ADMINURL);

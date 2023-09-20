@@ -18,14 +18,15 @@ if (!nv_function_exists('nv4_block_slide_list_video')) {
      *
      * @param mixed $module
      * @param mixed $data_block
-     * @param mixed $lang_block
      * @return
      */
-    function nv_block_config_slide_list_video($module, $data_block, $lang_block)
+    function nv_block_config_slide_list_video($module, $data_block)
     {
+        global $nv_Lang;
+
         $html = '';
         $html .= '<div class="form-group">';
-        $html .= '<label class="control-label col-sm-6">' . $lang_block['numrow'] . ':</label>';
+        $html .= '<label class="control-label col-sm-6">' . $nv_Lang->getModule('numrow') . ':</label>';
         $html .= '<div class="col-sm-8"><input type="text" class="form-control" name="config_numrow" value="' . $data_block['numrow'] . '"/></div>';
         $html .= '</div>';
         return $html;
@@ -35,10 +36,9 @@ if (!nv_function_exists('nv4_block_slide_list_video')) {
      * nv_block_config_slide_list_video_submit()
      *
      * @param mixed $module
-     * @param mixed $lang_block
      * @return
      */
-    function nv_block_config_slide_list_video_submit($module, $lang_block)
+    function nv_block_config_slide_list_video_submit($module)
     {
         global $nv_Request;
         $return = array();

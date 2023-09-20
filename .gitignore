@@ -24,6 +24,13 @@
 /.gitattributes
 /composer.json
 /LICENSE
+/error.php
+vinades/readme.txt
+/api.php
+/.github
+/mload.php
+/sload.php
+
 # Ignore fix module files and directories.
 /modules/*
 !/modules/videoclips
@@ -44,6 +51,3 @@
 !/themes/default/images/videoclips/*
 !/themes/default/modules/videoclips
 !/themes/default/modules/videoclips/*
-/error.php
-vinades/readme.txt
-/api.php

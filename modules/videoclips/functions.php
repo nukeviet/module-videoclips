@@ -124,10 +124,10 @@ if (isset($array_op[0]) and !empty($array_op[0]) and !preg_match("/^page\-(\d+)$
  */
 function nv_template_viewlist($array_data, $page = '')
 {
-    global $module_info, $lang_module, $configMods;
+    global $module_info, $configMods, $nv_Lang;
 
     $xtpl = new XTemplate("viewlist.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_info['module_theme']);
-    $xtpl->assign('LANG', $lang_module);
+    $xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 
     if (!empty($array_data)) {
         $i = 1;
@@ -160,10 +160,10 @@ function nv_template_viewlist($array_data, $page = '')
  */
 function nv_template_viewgrid($array_data, $page = '')
 {
-    global $module_info, $lang_module, $configMods;
+    global $module_info, $configMods, $nv_Lang;
 
     $xtpl = new XTemplate("viewgrid.tpl", NV_ROOTDIR . "/themes/" . $module_info['template'] . "/modules/" . $module_info['module_theme']);
-    $xtpl->assign('LANG', $lang_module);
+    $xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 
     if (!empty($array_data)) {
         $i = 1;
