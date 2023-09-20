@@ -10,7 +10,7 @@
 
 if (!defined('NV_ADMIN')) die('Stop!!!');
 
-$submenu['main'] = $nv_Lang->getModule('main');
-$submenu['topic'] = $nv_Lang->getModule('topic');
+$submenu['main'] = $nv_Lang->getModule('main_admin');
+$submenu['topic'] = $nv_Lang->getModule('topic_admin');
 $submenu['vbroken'] = $nv_Lang->getModule('vbroken');
 $submenu['config'] = $nv_Lang->getModule('config');

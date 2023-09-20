@@ -43,7 +43,7 @@ if (empty($topicList)) {
     exit();
 }
 
-$page_title = $nv_Lang->getModule('main');
+$page_title = $nv_Lang->getModule('main_admin');
 $contents = "";
 
 $sql = "SELECT COUNT(*) as count FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip";
@@ -291,7 +291,7 @@ foreach ($topicList as $id => $name) {
 
 $where = "";
 $base_url = NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name;
-$ptitle = $nv_Lang->getModule('main');
+$ptitle = $nv_Lang->getModule('main_admin');
 
 $_where = array(
     'tb1.id=tb2.cid'
