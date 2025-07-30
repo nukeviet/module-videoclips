@@ -12,10 +12,10 @@ if (!defined('NV_IS_MOD_VIDEOCLIPS')) {
     die('Stop!!!');
 }
 
+$where_admin = defined('NV_IS_MODADMIN') ? '' : ' AND a.status=1';
 $sql = "SELECT * FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip a,
 " . NV_PREFIXLANG . "_" . $module_data . "_hit b
-WHERE a.alias=" . $db->quote($alias_url) . "
-AND a.status=1 AND a.id=b.cid LIMIT 1";
+WHERE a.alias=" . $db->quote($alias_url) . $where_admin . " AND a.id=b.cid LIMIT 1";
 $result = $db->query($sql);
 $num = $result->rowCount();
 if (!$num) {
