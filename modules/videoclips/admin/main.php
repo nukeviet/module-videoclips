@@ -65,14 +65,15 @@ $xtpl->assign('module', $module_data);
 
 $groups_list = nv_groups_list();
 
+// Thêm và sửa clip
 if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit, id', 'get')) {
     if (defined('NV_EDITOR')) {
         require_once (NV_ROOTDIR . '/' . NV_EDITORSDIR . '/' . NV_EDITOR . '/nv.php');
     }
 
-    $post = array();
+    $post = [];
     $is_error = false;
-    $info = "";
+    $info = '';
 
     if ($nv_Request->isset_request('edit, id', 'get')) {
         $post['id'] = $nv_Request->get_int('id', 'get', 0);
@@ -81,11 +82,17 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
         $result = $db->query($sql);
         $num = $result->rowCount();
         if ($num != 1) {
-            Header("Location: " . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op);
-            die();
+            nv_redirect_location(NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
         }
 
         $row = $result->fetch();
+
+        // Lấy chi tiết
+        $sql = "SELECT ratio_w_h FROM " . NV_PREFIXLANG . "_" . $module_data . "_hit WHERE cid=" . $post['id'];
+        $detail = $db->query($sql)->fetch();
+        if (!empty($detail)) {
+            $row = array_merge($row, $detail);
+        }
     }
 
     if ($nv_Request->isset_request('btnsubmit', 'post')) {
@@ -131,6 +138,14 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
             $post['img'] = '';
         }
 
+        $post['ratio_w_h'] = $nv_Request->get_title('ratio_w_h', 'post', '');
+        if (!preg_match('/^[\s]*([0-9]+)[\s]*\:[\s]*([0-9]+)[\s]*$/', $post['ratio_w_h'], $matches)) {
+            $info = $lang_module['error9'];
+            $is_error = true;
+        } else {
+            $post['ratio_w_h'] = $matches[1] . ':' . $matches[2];
+        }
+
         if (!$is_error) {
             $test_content = strip_tags($post['bodytext']);
             $test_content = trim($test_content);
@@ -146,7 +161,7 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
             }
 
             if (isset($post['id'])) {
-                $query = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_clip SET
+                $sql = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_clip SET
                 tid=" . $post['tid'] . ",
                 alias=" . $db->quote($post['alias']) . ",
                 title=" . $db->quote($post['title']) . ",
@@ -160,31 +175,40 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
                  comm=" . $post['comm'] . "
                 WHERE id=" . $post['id'];
 
-                $db->query($query);
+                $db->query($sql);
 
                 nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['editClip'], "Id: " . $post['id'], $admin_info['userid']);
             } else {
-                $query = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_clip VALUES
+                $sql = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_clip VALUES
                 (NULL, " . $post['tid'] . ", " . $admin_info['userid'] . ", " . $db->quote($post['title']) . ", " . $db->quote($post['alias']) . ",
                 " . $db->quote($post['hometext']) . ", " . $db->quote($post['bodytext']) . ",
                 " . $db->quote($post['keywords']) . ", " . $db->quote($post['img']) . ",
                 " . $db->quote($post['internalpath']) . ", " . $db->quote($post['externalpath']) . ",
                 " . $post['comm'] . ",
                 1, " . NV_CURRENTTIME . ");";
-                $_id = $db->insert_id($query);
+                $_id = $db->insert_id($sql);
 
-                $query = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_hit VALUES (" . $_id . ", 0, 0, 0, 0);";
-                $db->query($query);
+                $sql = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "_hit (
+                    cid, view, liked, unlike, broken
+                ) VALUES (
+                    " . $_id . ", 0, 0, 0, 0
+                )";
+                $db->query($sql);
 
                 nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['addClip'], "Id: " . $_id, $admin_info['userid']);
             }
+
+            // Lưu các giá trị khác
+            $sql = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_hit SET
+                ratio_w_h=" . $db->quote($post['ratio_w_h']) . "
+            WHERE cid=" . (isset($post['id']) ? $post['id'] : $_id);
+            $db->query($sql);
+
             $nv_Cache->delMod($module_name);
             if ($post['redirect']) {
-                Header("Location: " . NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $post['alias']);
-                die();
+                nv_redirect_location(NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $post['alias']);
             }
-            Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
-            die();
+            nv_redirect_location(NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
         }
     } elseif (isset($post['id'])) {
         $post = $row;
@@ -224,6 +248,7 @@ if ($nv_Request->isset_request('add', 'get') or $nv_Request->isset_request('edit
 
     $xtpl->assign('INFO_TITLE', $informationtitle);
     $xtpl->assign('POST', $post);
+    $xtpl->assign('MODULE_CONFIG', $module_config[$module_name]);
 
     foreach ($topicList as $_tid => $_value) {
         $option = array(

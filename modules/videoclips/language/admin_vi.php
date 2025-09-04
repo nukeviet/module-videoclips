@@ -91,6 +91,8 @@ $lang_module['error4'] = 'Lỗi! Dữ liệu mới không được ghi lại vì
 $lang_module['error5'] = 'Lỗi! Tập tin video chưa được xác định';
 $lang_module['error6'] = 'Lỗi! Hình minh họa chưa được xác định';
 $lang_module['error7'] = 'Lỗi! Vui lòng điền nội dung vào ô Mô tả ngắn gọn';
+$lang_module['error8'] = 'Lỗi: Vui lòng điền nội dung chi tiết video';
+$lang_module['error9'] = 'Lỗi! Tỷ lệ video không hợp lệ. Tỷ lệ phải ở định dạng XX:YY trong đó XX và YY là số tự nhiên như: 4:3';
 $lang_module['error_required_alias'] = 'Lỗi: bạn cần nhập dữ liệu cho Liên kết tĩnh';
 $lang_module['error_regex_alias'] = 'Lỗi: Liên kết tĩnh không được bắt đầu bằng video- hoặc kết thúc bằng -video';
 
@@ -98,3 +100,4 @@ $lang_module['alias'] = 'Liên kết tĩnh';
 $lang_module['per_title'] = 'Số lượng ký tự tiêu đề bị cắt';
 $lang_module['ratio_w_h'] = 'Tỉ lệ chiều rộng: chiều cao';
 $lang_module['hint_ratio'] = 'Nhập tỉ lệ theo định dạng XX:YY trong đó XX và YY là số tự nhiên như: 4:3';
+$lang_module['hint_ratio2'] = 'Để trống ở đây video sẽ hiển thị theo tỉ lệ đang thiết lập theo cấu hình là';

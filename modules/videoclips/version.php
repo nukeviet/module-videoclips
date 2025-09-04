@@ -11,21 +11,21 @@
 if (!defined('NV_MAINFILE'))
     die('Stop!!!');
 
-$module_version = array(
+$module_version = [
     'name' => 'Videoclips',
     'modfuncs' => 'main,topic,detail',
     'submenu' => 'main',
     'is_sysmod' => 0,
     'virtual' => 1,
-    'version' => '4.5.02',
-    'date' => 'Saturday, September 24, 2022 15:00:00 GMT+07:00',
-    'author' => 'VINADES (contact@vinades.vn)',
+    'version' => '4.5.06',
+    'date' => 'Thursday, September 4, 2025 2:29:00 PM GMT+07:00',
+    'author' => 'VINADES <contact@vinades.vn>',
     'note' => 'Module playback of video-clips',
-    'uploads_dir' => array(
+    'uploads_dir' => [
         $module_upload,
         $module_upload . '/icons',
         $module_upload . '/images',
         $module_upload . '/video'
-    ),
-    'files_dir' => array($module_upload)
-);
+    ],
+    'files_dir' => [$module_upload]
+];

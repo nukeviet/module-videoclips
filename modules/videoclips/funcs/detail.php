@@ -113,7 +113,8 @@ $xtpl->assign('MODULE_FILE', $module_file);
 $xtpl->assign('MODULECONFIG', $configMods);
 $xtpl->assign('MODULEURL', nv_url_rewrite(NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $clip['alias'], 1));
 $xtpl->assign('SELFURL', $canonicalUrl);
-list($w, $h) = explode(':', $module_config[$module_name]['ratio_w_h']);
+
+list($w, $h) = explode(':', empty($clip['ratio_w_h']) ? $module_config[$module_name]['ratio_w_h'] : $clip['ratio_w_h']);
 $w = intval(trim($w));
 $h = intval(trim($h));
 $xtpl->assign('ratio', round($w / $h, 1));

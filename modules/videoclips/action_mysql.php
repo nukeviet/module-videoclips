@@ -49,6 +49,7 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
   liked mediumint(8) unsigned NOT NULL DEFAULT '0',
   unlike mediumint(8) unsigned NOT NULL DEFAULT '0',
   broken tinyint(1) unsigned NOT NULL DEFAULT '0',
+  ratio_w_h varchar(10) NOT NULL DEFAULT '' COMMENT 'Tỉ lệ khung hình tùy chọn',
   PRIMARY KEY (cid),
   KEY view (view),
   KEY liked (liked),
@@ -70,30 +71,34 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
 ) ENGINE=MyISAM";
 
 // Config module
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'idhomeclips', '0')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'otherClipsNum', '16')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'playerAutostart', '0')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'playerSkin', '')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'playerMaxWidth', '640')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'clean_title_video', '0')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'commNum', '20')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'viewtype', 'viewlist')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'liketool', 1)";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'ratio_w_h', '16:9')";
+$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES
+  ('" . $lang . "', '" . $module_name . "', 'idhomeclips', '0'),
+  ('" . $lang . "', '" . $module_name . "', 'otherClipsNum', '16'),
+  ('" . $lang . "', '" . $module_name . "', 'playerAutostart', '0'),
+  ('" . $lang . "', '" . $module_name . "', 'playerSkin', ''),
+  ('" . $lang . "', '" . $module_name . "', 'playerMaxWidth', '640'),
+  ('" . $lang . "', '" . $module_name . "', 'clean_title_video', '0'),
+  ('" . $lang . "', '" . $module_name . "', 'commNum', '20'),
+  ('" . $lang . "', '" . $module_name . "', 'viewtype', 'viewlist'),
+  ('" . $lang . "', '" . $module_name . "', 'liketool', 1),
+  ('" . $lang . "', '" . $module_name . "', 'ratio_w_h', '16:9')
+";
 
 // Comments
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'auto_postcomm', '1')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'allowed_comm', '6')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'view_comm', '6')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'setcomm', '4')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'activecomm', '1')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'emailcomm', '0')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'adminscomm', '')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'sortcomm', '0')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'captcha', '1')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'perpagecomm', '5')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'timeoutcomm', '360')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'allowattachcomm', '0')";
-$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'alloweditorcomm', '0')";
-$sql_create_module[] = 'INSERT INTO ' . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'captcha_area_comm', '1')";
-$sql_create_module[] = 'INSERT INTO ' . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES ('" . $lang . "', '" . $module_name . "', 'captcha_type_comm', 'captcha')";
+$sql_create_module[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " (lang, module, config_name, config_value) VALUES
+  ('" . $lang . "', '" . $module_name . "', 'auto_postcomm', '1'),
+  ('" . $lang . "', '" . $module_name . "', 'allowed_comm', '6'),
+  ('" . $lang . "', '" . $module_name . "', 'view_comm', '6'),
+  ('" . $lang . "', '" . $module_name . "', 'setcomm', '4'),
+  ('" . $lang . "', '" . $module_name . "', 'activecomm', '1'),
+  ('" . $lang . "', '" . $module_name . "', 'emailcomm', '0'),
+  ('" . $lang . "', '" . $module_name . "', 'adminscomm', ''),
+  ('" . $lang . "', '" . $module_name . "', 'sortcomm', '0'),
+  ('" . $lang . "', '" . $module_name . "', 'captcha', '1'),
+  ('" . $lang . "', '" . $module_name . "', 'perpagecomm', '5'),
+  ('" . $lang . "', '" . $module_name . "', 'timeoutcomm', '360'),
+  ('" . $lang . "', '" . $module_name . "', 'allowattachcomm', '0'),
+  ('" . $lang . "', '" . $module_name . "', 'alloweditorcomm', '0'),
+  ('" . $lang . "', '" . $module_name . "', 'captcha_area_comm', '1'),
+  ('" . $lang . "', '" . $module_name . "', 'captcha_type_comm', 'captcha')
+";

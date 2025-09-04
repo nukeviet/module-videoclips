@@ -86,6 +86,7 @@ $lang_module['error4'] = 'Error! New data were not recorded due to unknown cause
 $lang_module['error5'] = 'Error! Video file was not specified';
 $lang_module['error6'] = 'Error! Picture was not specified';
 $lang_module['error7'] = 'Error! Please report content in the Description box';
+$lang_module['error9'] = 'Error! Video ratio is invalid. The ratio must be in the XX:YY format where XX and YY are natural numbers like: 4:3';
 $lang_module['alias'] = 'Alias';
 $lang_module['commnum'] = 'Number of comments per page';
 $lang_module['cbroken'] = 'Bad Content';
