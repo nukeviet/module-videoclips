@@ -147,6 +147,13 @@
                 <td colspan="2">{CONTENT}</td>
             </tr>
             <tr>
+                <td><strong>{LANG.ratio_w_h}</strong></td>
+                <td>
+                    <input class="form-control w200" type="text" name="ratio_w_h" value="{POST.ratio_w_h}" placeholder="{MODULE_CONFIG.ratio_w_h}">
+                    <span class="help-block">{LANG.hint_ratio}. {LANG.hint_ratio2} {MODULE_CONFIG.ratio_w_h}</span>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" class="text-center"><input name="redirect" type="hidden" value="{POST.redirect}" /> <input class="btn btn-primary" name="btnsubmit" type="submit" value="{LANG.save}" /></td>
             </tr>
         </tbody>

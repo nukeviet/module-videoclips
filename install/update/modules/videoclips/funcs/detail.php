@@ -12,10 +12,10 @@ if (!defined('NV_IS_MOD_VIDEOCLIPS')) {
     die('Stop!!!');
 }
 
+$where_admin = defined('NV_IS_MODADMIN') ? '' : ' AND a.status=1';
 $sql = "SELECT * FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip a,
 " . NV_PREFIXLANG . "_" . $module_data . "_hit b
-WHERE a.alias=" . $db->quote($alias_url) . "
-AND a.status=1 AND a.id=b.cid LIMIT 1";
+WHERE a.alias=" . $db->quote($alias_url) . $where_admin . " AND a.id=b.cid" . $where_admin . " LIMIT 1";
 $result = $db->query($sql);
 $num = $result->rowCount();
 if (!$num) {
@@ -41,10 +41,9 @@ if (isset($site_mods['comment']) and isset($module_config[$module_name]['activec
     define('NV_PER_PAGE_COMMENT', 5); //Số bản ghi hiển thị bình luận
     require_once NV_ROOTDIR . '/modules/comment/comment.php';
     $area = (defined('NV_COMM_AREA')) ? NV_COMM_AREA : 0;
-    $checkss = md5($module_name . '-' . $area . '-' . NV_COMM_ID . '-' . $allowed . '-' . NV_CACHE_PREFIX);
+    $checkss = md5($module_name . '-' . $area . '-' . NV_COMM_ID . '-' . $allowed . '-' . NV_CHECK_SESSION);
 
     //get url comment
-    $url_info = parse_url($client_info['selfurl']);
     $content_comment = nv_comment_module($module_name, $checkss, $area, NV_COMM_ID, $allowed, 1);
 } else {
     $content_comment = '';
@@ -113,8 +112,9 @@ $xtpl->assign('MODULE_THEME', $module_info['module_theme']);
 $xtpl->assign('MODULE_FILE', $module_file);
 $xtpl->assign('MODULECONFIG', $configMods);
 $xtpl->assign('MODULEURL', nv_url_rewrite(NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $clip['alias'], 1));
-$xtpl->assign('SELFURL', $client_info['selfurl']);
-list($w, $h) = explode(':', $module_config[$module_name]['ratio_w_h']);
+$xtpl->assign('SELFURL', $canonicalUrl);
+
+list($w, $h) = explode(':', empty($clip['ratio_w_h']) ? $module_config[$module_name]['ratio_w_h'] : $clip['ratio_w_h']);
 $w = intval(trim($w));
 $h = intval(trim($h));
 $xtpl->assign('ratio', round($w / $h, 1));
@@ -122,7 +122,7 @@ $xtpl->assign('ratio', round($w / $h, 1));
 $lang = (NV_LANG_DATA == 'vi') ? 'vi_VN' : 'en_US';
 $xtpl->assign('FACEBOOK_LANG', $lang);
 $meta_property['og:type'] = "website";
-$meta_property['og:url'] = $client_info['selfurl'];
+$meta_property['og:url'] = $canonicalUrl;
 
 if (!empty($clip['img']) && file_exists(NV_ROOTDIR . '/' . NV_UPLOADS_DIR . '/' . $module_upload . '/' . $clip['img'])) {
     $meta_property['og:image'] = NV_MY_DOMAIN . NV_BASE_SITEURL . NV_UPLOADS_DIR . '/' . $module_upload . '/' . $clip['img'];

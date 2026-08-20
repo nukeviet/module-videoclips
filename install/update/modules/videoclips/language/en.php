@@ -37,3 +37,4 @@ $lang_module['moreContent'] = 'Show more content';
 $lang_module['collapseContent'] = 'Collapse content';
 $lang_module['accessForbidden'] = 'Access forbidden. Can video-clip is only for members or administrators. Please log in member before you watch this video-clip. If you are logged in but still can not watch this video-clip, please notify the administrator of this website';
 $lang_module['commHits'] = 'Comments';
+$lang_module['incat'] = 'Videos in the same category';
