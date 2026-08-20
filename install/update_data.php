@@ -414,7 +414,7 @@ function nv_up_p5()
 /**
  * @return array
  */
-function nv_up_p5()
+function nv_up_p6()
 {
     global $nv_update_baseurl, $db, $db_config, $nv_Cache, $array_modlang_update;
 
