@@ -25,7 +25,9 @@ if (($cache = $nv_Cache->getItem($module_name, $cacheFile, $cacheTTL)) != false)
 } else {
     $sql = "SELECT alias, addtime FROM " . NV_PREFIXLANG . "_" . $module_data . "_clip WHERE status=1";
     $result = $db->query($sql);
-    while (list($alias, $publtime) = $result->fetch(3)) {
+    while ($_scratch = $result->fetch(3)) {
+        list($alias, $publtime) = $_scratch;
+        unset($_scratch);
         $url[] = [
             'link' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=video-" . $alias . $global_config['rewrite_exturl'],
             'publtime' => $publtime

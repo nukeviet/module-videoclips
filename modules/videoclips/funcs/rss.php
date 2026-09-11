@@ -26,7 +26,9 @@ $sql = "SELECT id, addtime, title, alias, hometext, img FROM `" . NV_PREFIXLANG 
 
 if ($module_info['rss']) {
     $result = $db->query($sql);
-    while (list ($id, $publtime, $title, $alias, $hometext, $homeimgfile) = $result->fetch(3)) {
+    while ($_scratch = $result->fetch(3)) {
+        list($id, $publtime, $title, $alias, $hometext, $homeimgfile) = $_scratch;
+        unset($_scratch);
         if (!empty($homeimgfile)) {
             $imageinfo = nv_ImageInfo(NV_ROOTDIR . '/' . $homeimgfile, 120, true, NV_ROOTDIR . '/' . NV_FILES_DIR . '/' . $module_name);
             $homeimgfile = $imageinfo['src'];

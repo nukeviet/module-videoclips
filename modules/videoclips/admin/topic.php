@@ -82,8 +82,11 @@ function nv_del_topic($tid)
 
     $sql = "SELECT id FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE parentid=" . $tid;
     $result = $db->query($sql);
-    while (list ($id) = $result->fetch(3))
+    while ($_scratch = $result->fetch(3)) {
+        list($id) = $_scratch;
+        unset($_scratch);
         nv_del_topic($id);
+    }
 
     $sql = "DELETE FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id=" . $tid;
     $db->query($sql);
@@ -408,7 +411,7 @@ if ($nv_Request->isset_request('del', 'post,get')) {
 
     $sql = "SELECT COUNT(*) AS count, parentid FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id=" . $tid;
     $result = $db->query($sql);
-    list ($count, $parentid) = $result->fetch(3);
+    list ($count, $parentid) = $result->fetch(3) ?: [null, null];
 
     if ($count != 1) {
         die('NO');
@@ -505,7 +508,7 @@ if (!$num and empty($q)) {
 if ($pid) {
     $sql2 = "SELECT title,parentid FROM " . NV_PREFIXLANG . "_" . $module_data . "_topic WHERE id=" . $pid;
     $result2 = $db->query($sql2);
-    list ($parentid, $parentid2) = $result2->fetch(3);
+    list ($parentid, $parentid2) = $result2->fetch(3) ?: [null, null];
     $caption = sprintf($lang_module['listSubTopic'], $parentid);
     $parentid = "<a href=\"" . NV_BASE_ADMINURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $op . "&amp;pid=" . $parentid2 . "\">" . $parentid . "</a>";
 } else {
